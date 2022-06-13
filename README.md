@@ -1,4 +1,4 @@
-# IT128L - SIA 2  
+# IT128L - SIA 2
 ***
 For the IT128L class Systems Integration and Architecture 2 under ma'am Antonette Gabriel
 
@@ -17,3 +17,4 @@ For the IT128L class Systems Integration and Architecture 2 under ma'am Antonett
 ***
 ## Notes
 * Each exercise has a different workspace directory but they should all have more or less the same settings. Remember to set the Java library directory and version number on Eclipse to the appropriate one on your machine.
+* Video demos are available for some exercises which may show a working version of the activity.

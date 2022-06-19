@@ -35,10 +35,10 @@ public class OperatorClient {
 					break;
 				
 				case "b": 
-					Employee removeEmp = new Employee();
+					Employee deleteEmp = new Employee();
 					System.out.println("Enter Employee ID for deletion: ");
-					removeEmp.setId(scan.nextLine());
-					employee.removeEmployee(removeEmp);
+					deleteEmp.setId(scan.nextLine());
+					employee.deleteEmployee(deleteEmp);
 					break;
 				
 				case "c":

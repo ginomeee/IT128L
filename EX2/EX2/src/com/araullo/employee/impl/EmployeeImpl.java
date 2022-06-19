@@ -42,7 +42,7 @@ public class EmployeeImpl implements EmployeeFx{
 		return  (Employee []) emps.toArray(new Employee[emps.size()]);
 	}
 	@Override
-	public String removeEmployee(Employee employee) {
+	public String deleteEmployee(Employee employee) {
 		try {
 			employees.remove(employee.getId());
 			return "removed";	

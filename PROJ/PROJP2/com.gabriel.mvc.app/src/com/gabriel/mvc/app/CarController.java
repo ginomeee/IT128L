@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
@@ -21,6 +22,8 @@ import com.gabriel.mvc.shapesfx.Mover;
 
 
 public class CarController extends JFrame implements ActionListener{
+	public CarController() {
+	}
 	
 	
 	CarView carView;  
@@ -32,14 +35,15 @@ public class CarController extends JFrame implements ActionListener{
 	JButton btnDown= new JButton("↓");
 	JButton btnUpdate= new JButton("Update");
 	JButton btnCreate = new JButton("Create");
+	JButton btnDelete = new JButton("Delete");
 	JComboBox nameInput = new JComboBox();
 	JTextArea priceInput = new JTextArea("Input Vehicle Price here");
 	JComboBox brandInput = new JComboBox(); 
 	JComboBox customBrandInput = new JComboBox(); 
-	JTextArea newModelText = new JTextArea();
-	JTextArea newPriceText = new JTextArea();
-	JTextArea newCodeText = new JTextArea();
-	JTextArea newStockText = new JTextArea();
+	JTextField newModelText = new JTextField("Input Model Here");
+	JTextField newPriceText = new JTextField("Input Price Here");
+	JTextField newCodeText = new JTextField("Input Code Here");
+	JTextField newStockText = new JTextField("Input Stock Here");
 	JTable vehicleDeets = new JTable(5, 2) {
 		@Override
 	    public boolean isCellEditable(int row, int column) {                
@@ -54,7 +58,7 @@ public class CarController extends JFrame implements ActionListener{
 	JLabel brandTitle = new JLabel("Brand");
 	JLabel modelTitle = new JLabel("Model");
 	JLabel footer = new JLabel("ARAULLO, Eugenio Emmanuel A.");
-	JLabel customInput = new JLabel("Upload a new vehicle");
+	JLabel customInput = new JLabel("Input a new vehicle");
 	JLabel r1 = new JLabel("Brand");
 	JLabel r2 = new JLabel("Model");
 	JLabel r3 = new JLabel("Code");
@@ -80,7 +84,7 @@ public class CarController extends JFrame implements ActionListener{
 	
 	
 	public void initUI() {
-		setTitle("Controller | Ginos Toy Car");
+		setTitle("Controller | IT128 PROJECT");
 		try {
 	         Connection con = DriverManager.getConnection(
 	            "jdbc:mysql://127.0.0.1:3306/it128","root", "");
@@ -158,7 +162,10 @@ public class CarController extends JFrame implements ActionListener{
 		btnDown.setFont(new Font("Consolas", Font.PLAIN, 40));
 		btnDown.setBounds(110,250,100,100);
 		btnDown.setFont(new Font("Consolas", Font.PLAIN, 28));
-		btnUpdate.setBounds(330,310,290,50);
+		btnUpdate.setFont(new Font("Consolas", Font.PLAIN, 20));
+		btnUpdate.setBounds(330,310,150,50);
+		btnDelete.setBounds(480,310,140,50);
+		btnDelete.setFont(new Font("Consolas", Font.PLAIN, 20));
 		btnCreate.setBounds(700,310,200,50);
 		newModelText.setBounds(700,110,200,30);
 		newModelText.setFont(new Font("Consolas", Font.PLAIN, 20));
@@ -168,6 +175,8 @@ public class CarController extends JFrame implements ActionListener{
 		newPriceText.setFont(new Font("Consolas", Font.PLAIN, 20));
 		newCodeText.setBounds(700,270,200,30);
 		newCodeText.setFont(new Font("Consolas", Font.PLAIN, 20));
+		customBrandInput.setBounds(700,40,200,40);
+		customBrandInput.setFont(new Font("Consolas", Font.PLAIN, 20));
 		// Jcombo1 - Makes
 		brandInput.setBounds(330,40,290,40);
 		brandInput.setFont(new Font("Consolas", Font.PLAIN, 20));
@@ -189,6 +198,8 @@ public class CarController extends JFrame implements ActionListener{
 		mytitle.setFont(new Font("Consolas", Font.PLAIN, 20));
 		mytitle.setBounds(10,0,310,50);
 		customInput.setBounds(700,0,300,50);
+		customInput.setForeground(Color.GRAY);
+		customInput.setFont(new Font("Consolas", Font.PLAIN, 18));
 		mytitle.setFont(new Font("Consolas", Font.PLAIN, 20));
 		r1.setBounds(20,0,300,50);
 		footer.setForeground(Color.GRAY);
@@ -201,32 +212,41 @@ public class CarController extends JFrame implements ActionListener{
 		modelTitle.setFont(new Font("Consolas", Font.PLAIN, 18));
 		modelTitle.setBounds(327,70,300,50);
 		
-		add(btnRight);
-		add(btnLeft);
-		add(btnUp);
-		add(btnDown);
-		add(btnUpdate);
+		getContentPane().add(btnRight);
+		getContentPane().add(btnLeft);
+		getContentPane().add(btnUp);
+		getContentPane().add(btnDown);
+		getContentPane().add(btnUpdate);
+		getContentPane().add(btnDelete);
+		btnDelete.setEnabled(false);
+		getContentPane().add(btnCreate);
+		btnCreate.setEnabled(false);
 		btnUpdate.setEnabled(false);
-		add(mytitle);
-		add(footer);
-		add(brandInput);
-		add(nameInput);	
+		getContentPane().add(mytitle);
+		getContentPane().add(footer);
+		getContentPane().add(brandInput);
+		getContentPane().add(nameInput);	
 		nameInput.setEnabled(false);
-		add(brandTitle);
-		add(modelTitle);
-		add(vehicleDeets);
-		add(btnCreate);
-		add(newModelText);
-		add(newStockText);
-		add(newPriceText);
-		add(newCodeText);
-		add(customInput);
-		add(r1);
-		add(r2);
-		add(r3);
-		add(r4);
-		add(r5);
+		getContentPane().add(brandTitle);
+		getContentPane().add(modelTitle);
+		getContentPane().add(vehicleDeets);
+		getContentPane().add(newModelText);
+		getContentPane().add(newStockText);
+		getContentPane().add(newPriceText);
+		getContentPane().add(newCodeText);
+		getContentPane().add(customInput);
+		getContentPane().add(customBrandInput);
+		getContentPane().add(r1);
+		getContentPane().add(r2);
+		getContentPane().add(r3);
+		getContentPane().add(r4);
+		getContentPane().add(r5);
 		vehicleDeets.setEnabled(false);
+		newModelText.setEditable(false);
+		newCodeText.setEditable(false);
+		newPriceText.setEditable(false);
+		newStockText.setEditable(false);
+		btnCreate.setEnabled(false);
 		
 		btnRight.addActionListener(this);
 		btnLeft.addActionListener(this);
@@ -234,15 +254,18 @@ public class CarController extends JFrame implements ActionListener{
 		btnDown.addActionListener(this);
 		btnUpdate.addActionListener(this);
 		btnCreate.addActionListener(this);
+		btnDelete.addActionListener(this);
 		brandInput.addActionListener(this);
 		brandInput.setModel(new DefaultComboBoxModel (brands));
+		customBrandInput.addActionListener(this);
+		customBrandInput.setModel(new DefaultComboBoxModel (brands));
 		nameInput.addActionListener(this);
 		nameInput.setModel(new DefaultComboBoxModel (allmodels));
 
-		setLayout(null);
+		getContentPane().setLayout(null);
 		setVisible(true);
 		setBounds(600,10,500,500);
-		setSize(1000,430);
+		setSize(940,430);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -305,6 +328,7 @@ public class CarController extends JFrame implements ActionListener{
 						vehicleDeets.setValueAt(webItem[i].getPrice(),3,1);
 						vehicleDeets.setValueAt(webItem[i].getStock(),4,1);
 						btnUpdate.setEnabled(true);
+						btnDelete.setEnabled(true);
 						vehicleDeets.setEnabled(true);
 						pointer = webItem[i].getWebID();
 					}
@@ -312,21 +336,66 @@ public class CarController extends JFrame implements ActionListener{
 			}
 			
 		} else if (e.getSource() == btnUpdate) {
-			System.out.println("Changed table cell at: " + vehicleDeets.getValueAt(0,1));
+			 // DEBUG ONLY System.out.println("Changed table cell at: " + vehicleDeets.getValueAt(0,1));
 			 try {
 		         Connection con = DriverManager.getConnection(
 		            "jdbc:mysql://127.0.0.1:3306/it128","root", "");
 		         String newModel = (String) vehicleDeets.getValueAt(1,1);
 		         String newCode = (String) vehicleDeets.getValueAt(2,1);
-		         float newPrice = (float) vehicleDeets.getValueAt(3,1);
-		         int newStock = (int) vehicleDeets.getValueAt(4,1);
+		         float newPrice = Float.parseFloat(vehicleDeets.getValueAt(3,1).toString());
+		         int newStock = Integer.parseInt(vehicleDeets.getValueAt(4,1).toString());
 		         Statement stmt = con.createStatement();
 		         stmt.executeUpdate("UPDATE `items` SET `model`='" + newModel + "', `price`='"+newPrice+"', `qty`='"+newStock+"', `code` = '"+newCode+"' WHERE ID = " + pointer);
 		         System.out.println("Pointer is currently at: " + pointer);
 		         System.out.println("id  name    price");
+		        initUI();
 		      } catch(SQLException e1) {
 		    	  JOptionPane.showMessageDialog(null, "SQL Exception Occured");
 		    	  JOptionPane.showMessageDialog(null, "SQL Exception Occured");
+		         System.out.println("SQL exception occured" + e1);
+		      }
+		} else if (e.getSource() == btnCreate) {
+			 try {
+		         Connection con = DriverManager.getConnection(
+		            "jdbc:mysql://127.0.0.1:3306/it128","root", "");
+		         int newBrand = customBrandInput.getSelectedIndex();
+		         String newModel = newModelText.getText();
+		         String newCode = newCodeText.getText();
+		         float newPrice = Float.parseFloat(newPriceText.getText());
+		         int newStock = Integer.parseInt(newStockText.getText());
+		         Statement stmt = con.createStatement();
+		         stmt.executeUpdate("INSERT INTO `items`(`model`, `price`, `qty`, `brand`, `code`) VALUES ('" + newModel + "', '"+newPrice+"', '"+newStock+"', '"+newBrand+"', '"+newCode+"')");
+		         System.out.println("Pointer is currently at: " + pointer);
+		         System.out.println("id  name    price");
+		         JOptionPane.showMessageDialog(null, "Successfully Created Record for " + newBrand + " " + newModel);
+		         newModelText.setText("Input Model here");
+		         newCodeText.setText("Input Code here");
+		         newPriceText.setText("Input Price here");
+		         newStockText.setText("Input Stock here");
+		        initUI();
+		      } catch(SQLException e1) {
+		    	  JOptionPane.showMessageDialog(null, "SQL Exception Occured");
+		         System.out.println("SQL exception occured" + e1);
+		      }
+		} else if (e.getSource() == customBrandInput) {
+			if (customBrandInput.getSelectedIndex()!=0) {
+					btnCreate.setEnabled(true);
+					newModelText.setEditable(true);
+					newCodeText.setEditable(true);
+					newPriceText.setEditable(true);
+					newStockText.setEditable(true);
+					btnCreate.setEnabled(true);
+				}
+		} else if (e.getSource() == btnDelete) {
+			try {
+		         Connection con = DriverManager.getConnection(
+		            "jdbc:mysql://127.0.0.1:3306/it128","root", "");
+		         Statement stmt = con.createStatement();
+		         stmt.executeUpdate("DELETE FROM `items` WHERE `items`.`ID` = " + pointer);
+		         JOptionPane.showMessageDialog(null,"Deleted Record");
+		        initUI();
+		      } catch(SQLException e1) {
+		    	 JOptionPane.showMessageDialog(null, "SQL Exception Occured");
 		         System.out.println("SQL exception occured" + e1);
 		      }
 		}

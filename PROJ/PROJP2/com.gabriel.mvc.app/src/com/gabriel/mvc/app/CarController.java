@@ -35,6 +35,7 @@ public class CarController extends JFrame implements ActionListener{
 	JComboBox nameInput = new JComboBox();
 	JTextArea priceInput = new JTextArea("Input Vehicle Price here");
 	JComboBox brandInput = new JComboBox(); 
+	JComboBox customBrandInput = new JComboBox(); 
 	JTextArea newModelText = new JTextArea();
 	JTextArea newPriceText = new JTextArea();
 	JTextArea newCodeText = new JTextArea();
@@ -49,10 +50,16 @@ public class CarController extends JFrame implements ActionListener{
 	static Connection connection = null;
 	
 	
-	JLabel mytitle = new JLabel("Gino's Toy Car Controller");
+	JLabel mytitle = new JLabel("IT128 PROJ Car Web Inventory");
 	JLabel brandTitle = new JLabel("Brand");
 	JLabel modelTitle = new JLabel("Model");
 	JLabel footer = new JLabel("ARAULLO, Eugenio Emmanuel A.");
+	JLabel customInput = new JLabel("Upload a new vehicle");
+	JLabel r1 = new JLabel("Brand");
+	JLabel r2 = new JLabel("Model");
+	JLabel r3 = new JLabel("Code");
+	JLabel r4 = new JLabel("Price");
+	JLabel r5 = new JLabel("Stock");
 	Item webItem[];
 	Brand webBrand[];
 	int brandCount=0;
@@ -151,24 +158,24 @@ public class CarController extends JFrame implements ActionListener{
 		btnDown.setFont(new Font("Consolas", Font.PLAIN, 40));
 		btnDown.setBounds(110,250,100,100);
 		btnDown.setFont(new Font("Consolas", Font.PLAIN, 28));
-		btnUpdate.setBounds(330,310,270,50);
-		btnCreate.setBounds(620,310,200,50);
-		newModelText.setBounds(620,110,200,30);
+		btnUpdate.setBounds(330,310,290,50);
+		btnCreate.setBounds(700,310,200,50);
+		newModelText.setBounds(700,110,200,30);
 		newModelText.setFont(new Font("Consolas", Font.PLAIN, 20));
-		newStockText.setBounds(620,160,200,30);
+		newStockText.setBounds(700,160,200,30);
 		newStockText.setFont(new Font("Consolas", Font.PLAIN, 20));
-		newPriceText.setBounds(620,210,200,30);
+		newPriceText.setBounds(700,210,200,30);
 		newPriceText.setFont(new Font("Consolas", Font.PLAIN, 20));
-		newCodeText.setBounds(620,270,200,30);
+		newCodeText.setBounds(700,270,200,30);
 		newCodeText.setFont(new Font("Consolas", Font.PLAIN, 20));
 		// Jcombo1 - Makes
-		brandInput.setBounds(330,40,270,40);
+		brandInput.setBounds(330,40,290,40);
 		brandInput.setFont(new Font("Consolas", Font.PLAIN, 20));
 		// Jcombo2 - Models
-		nameInput.setBounds(330,110,270,40);
+		nameInput.setBounds(330,110,290,40);
 		nameInput.setFont(new Font("Consolas", Font.PLAIN, 20));
 		// Vehicle Deets
-		vehicleDeets.setBounds(330,160,270,140);
+		vehicleDeets.setBounds(330,160,290,140);
 		vehicleDeets.setFont(new Font("Consolas", Font.PLAIN, 24));
 		vehicleDeets.setValueAt("Brand",0,0);
 		vehicleDeets.setValueAt("Model",1,0);
@@ -180,7 +187,10 @@ public class CarController extends JFrame implements ActionListener{
 		// Background and text
 		mytitle.setForeground(Color.white);
 		mytitle.setFont(new Font("Consolas", Font.PLAIN, 20));
-		mytitle.setBounds(20,0,300,50);
+		mytitle.setBounds(10,0,310,50);
+		customInput.setBounds(700,0,300,50);
+		mytitle.setFont(new Font("Consolas", Font.PLAIN, 20));
+		r1.setBounds(20,0,300,50);
 		footer.setForeground(Color.GRAY);
 		footer.setFont(new Font("Consolas", Font.PLAIN, 18));
 		footer.setBounds(20,350,300,50);
@@ -210,6 +220,12 @@ public class CarController extends JFrame implements ActionListener{
 		add(newStockText);
 		add(newPriceText);
 		add(newCodeText);
+		add(customInput);
+		add(r1);
+		add(r2);
+		add(r3);
+		add(r4);
+		add(r5);
 		vehicleDeets.setEnabled(false);
 		
 		btnRight.addActionListener(this);
@@ -226,7 +242,7 @@ public class CarController extends JFrame implements ActionListener{
 		setLayout(null);
 		setVisible(true);
 		setBounds(600,10,500,500);
-		setSize(900,430);
+		setSize(1000,430);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -302,13 +318,14 @@ public class CarController extends JFrame implements ActionListener{
 		            "jdbc:mysql://127.0.0.1:3306/it128","root", "");
 		         String newModel = (String) vehicleDeets.getValueAt(1,1);
 		         String newCode = (String) vehicleDeets.getValueAt(2,1);
-		         String newPrice = (String) vehicleDeets.getValueAt(3,1);
-		         String newStock = (String) vehicleDeets.getValueAt(4,1);
+		         float newPrice = (float) vehicleDeets.getValueAt(3,1);
+		         int newStock = (int) vehicleDeets.getValueAt(4,1);
 		         Statement stmt = con.createStatement();
 		         stmt.executeUpdate("UPDATE `items` SET `model`='" + newModel + "', `price`='"+newPrice+"', `qty`='"+newStock+"', `code` = '"+newCode+"' WHERE ID = " + pointer);
 		         System.out.println("Pointer is currently at: " + pointer);
 		         System.out.println("id  name    price");
 		      } catch(SQLException e1) {
+		    	  JOptionPane.showMessageDialog(null, "SQL Exception Occured");
 		    	  JOptionPane.showMessageDialog(null, "SQL Exception Occured");
 		         System.out.println("SQL exception occured" + e1);
 		      }

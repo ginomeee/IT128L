@@ -25,7 +25,6 @@ public class CarController extends JFrame implements ActionListener{
 	public CarController() {
 	}
 	
-	
 	CarView carView;  
 	MyShape car;
 	Mover mover = new CarMover();

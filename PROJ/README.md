@@ -9,3 +9,5 @@ This is basically a car inventory system where users can:
 - Delete records of existing vehicles
 
 This is a Java program that uses a MySQL database and connects via the localhost server.
+
+*Note:* PROJP2 *requires* `mysql-connector-java-8.0.30.jar` located in the root directory of this repository. Fix the build settings and point the missing JAR file to the file.
